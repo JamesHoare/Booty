@@ -8,9 +8,9 @@ import java.util.Optional;
  * Created by jameshoare on 29/03/2014.
  */
 
-public interface CustomerRepository extends JpaRepository<Customer,Integer> {
+public interface CustomerCrudRepository extends JpaRepository<Customer,Integer> {
 
-    Optional<Customer> findByCustomerId(Integer customerId);
+    Customer findByCustomerId(Integer customerId);
 }
 
 

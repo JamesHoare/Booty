@@ -6,12 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import java.io.Serializable;
 
 /**
  * Created by jameshoare on 29/03/2014.
  */
 @Entity
-public class Customer {
+public class Customer implements Serializable {
 
     @Override
     public String toString() {

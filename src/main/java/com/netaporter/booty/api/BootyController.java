@@ -1,15 +1,12 @@
 package com.netaporter.booty.api;
 
 import com.netaporter.booty.domain.Customer;
-import com.netaporter.booty.domain.CustomerRepository;
+import com.netaporter.booty.domain.CustomerCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.http.MediaType.*;
 
 /**
  * Created by jameshoare on 28/03/2014.
@@ -19,23 +16,24 @@ public class BootyController {
 
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerCrudRepository customerRepository;
 
-    @RequestMapping(value = "/booty",produces = APPLICATION_JSON_VALUE)
-    public String greetingBooty(){
+    @RequestMapping(value = "/booty")
+    public @ResponseBody String greetingBooty(){
         return "Hello Booty";
     }
 
-    @RequestMapping(value = "/customer",method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public Collection<Customer> getCustomer() {
+    @RequestMapping(value = "/customer",method = RequestMethod.GET)
+    public @ResponseBody
+    List<Customer> getCustomer() {
         return customerRepository.findAll();
     }
 
 
-    @RequestMapping
-    public Optional<Customer> getCustomerById(@RequestParam(value = "id", required = true) Integer id) {
-          return customerRepository.findByCustomerId(id);
-          //todo learn optional
+    @RequestMapping(value="/customer/{customerId}", method = RequestMethod.GET)
+    public @ResponseBody Customer getCustomerById(@PathVariable("customerId")  Integer customerId) {
+          Optional<Customer> c =  Optional.of(customerRepository.findByCustomerId(customerId));
+          return c.orElseThrow(IllegalStateException::new);
 
 
     }
