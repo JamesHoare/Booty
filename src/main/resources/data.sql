@@ -1,2 +1,3 @@
-insert into customer(name) values( 'James');
+insert into customer (firstName,lastName) values ( 'James','Hoare');
+
 

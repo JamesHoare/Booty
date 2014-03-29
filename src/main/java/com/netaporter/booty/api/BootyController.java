@@ -4,9 +4,10 @@ import com.netaporter.booty.domain.Customer;
 import com.netaporter.booty.domain.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.*;
 
@@ -26,8 +27,17 @@ public class BootyController {
     }
 
     @RequestMapping(value = "/customer",method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public java.util.Collection<Customer> getCustomer() {
+    public Collection<Customer> getCustomer() {
         return customerRepository.findAll();
+    }
+
+
+    @RequestMapping
+    public Optional<Customer> getCustomerById(@RequestParam(value = "id", required = true) Integer id) {
+          return customerRepository.findByCustomerId(id);
+          //todo learn optional
+
+
     }
 
 
