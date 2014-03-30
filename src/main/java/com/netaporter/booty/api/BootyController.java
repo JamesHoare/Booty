@@ -22,27 +22,23 @@ public class BootyController {
     }
 
     @RequestMapping(value = "/booty")
-    public @ResponseBody String greetingBooty(){
+    public String greetingBooty() {
         return "Hello Booty";
     }
 
-    @RequestMapping(value = "/customer",method = RequestMethod.GET)
-    public @ResponseBody
-    List<Customer> getCustomer() {
+    @RequestMapping(value = "/customer", method = RequestMethod.GET)
+    public List<Customer> getCustomer() {
         return customerRepository.findAll();
     }
 
 
-    @RequestMapping(value="/customer/{customerId}", method = RequestMethod.GET)
-    public @ResponseBody Customer getCustomerById(@PathVariable("customerId")  Integer customerId) {
-          Optional<Customer> c =  Optional.of(customerRepository.findByCustomerId(customerId));
-          return c.orElseThrow(IllegalStateException::new);
+    @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
+    public Customer getCustomerById(@PathVariable("customerId") Integer customerId) {
+        Optional<Customer> c = Optional.of(customerRepository.findByCustomerId(customerId));
+        return c.orElseThrow(IllegalStateException::new);
 
 
     }
-
-
-
 
 
 }
