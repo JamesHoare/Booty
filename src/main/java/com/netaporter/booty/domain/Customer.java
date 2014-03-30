@@ -6,7 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by jameshoare on 29/03/2014.
@@ -19,12 +23,16 @@ public class Customer implements Serializable {
         return String.format("Customer[id=%d, firstName=%s, lastName=%s]", customerId, firstName, lastName);
     }
 
-    protected Customer() {}
+    protected Customer() {
+
+    }
 
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,6 +52,29 @@ public class Customer implements Serializable {
 
     @NotEmpty(message = "Last name is required")
     private String lastName;
+
+
+
+    public static boolean isJames(Customer customer) {
+        return "James".equals(customer.getFirstName());
+    }
+
+
+    /**
+     *
+     * @param customers
+     * @param p
+     * @retur filtered List of customer by predicates
+     */
+    public static List<Customer> filterCustomers(List<Customer> customers, Predicate<Customer> p){
+        List<Customer> result = new ArrayList<>();
+        for(Customer customer : customers){
+            if(p.test(customer)){
+                result.add(customer);
+            }
+        }
+        return result;
+    }
 
 
     public String getFirstName() {
