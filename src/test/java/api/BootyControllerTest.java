@@ -20,38 +20,38 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BootyControllerTest {
 
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-        private final ObjectMapper objectMapper = new ObjectMapper();
-
-        @Test
-        public void testBootyController() throws Exception {
-
-
-            final CustomerCrudRepository repository = mock(CustomerCrudRepository.class);
-
-            final Customer customer = new Customer("James", "Hoare");
-            stub(repository.findByCustomerId(1)).toReturn(customer);
+    @Test
+    public void testBootyController() throws Exception {
 
 
-            final BootyController controller = new BootyController(repository);
-            final MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        final CustomerCrudRepository repository = mock(CustomerCrudRepository.class);
+
+        final Customer customer = new Customer("James", "Hoare");
+        stub(repository.findByCustomerId(1)).toReturn(customer);
 
 
-            // Valid request
-            mockMvc
-                    .perform(
-                            get("http://localhost:9000/customer/1")
-
-                    )
-                    .andExpect(status().isOk())
-                    .andExpect(content().string(
-                                    objectMapper.writeValueAsString(new Customer("James", "Hoare")))
-                    );
-
-            verify(repository, times(1)).findByCustomerId(1);
+        final BootyController controller = new BootyController(repository);
+        final MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
 
-        }
+        // Valid request
+        mockMvc
+                .perform(
+                        get("http://localhost:9000/customer/1")
+
+                )
+
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                                objectMapper.writeValueAsString(new Customer("James", "Hoare")))
+                );
+
+        verify(repository, times(1)).findByCustomerId(1);
 
 
     }
+
+
+}

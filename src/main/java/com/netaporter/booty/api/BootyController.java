@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 public class BootyController {
 
-    private CustomerCrudRepository customerRepository;
+    private final CustomerCrudRepository customerRepository;
 
     @Autowired
     public BootyController(final CustomerCrudRepository customerRepository) {
