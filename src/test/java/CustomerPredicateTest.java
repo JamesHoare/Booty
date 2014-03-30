@@ -1,6 +1,10 @@
 import com.netaporter.booty.domain.Customer;
 import org.junit.Test;
 
+import java.util.stream.*;
+import java.util.*;
+import static java.util.stream.Collectors.toList;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,8 +23,16 @@ public class CustomerPredicateTest {
                 new Customer("duck", "fuzzy"));
 
 
-        List<Customer> filteredCustomers = filterCustomers(customer, Customer::isJames);
+        filterCustomers(customer, c -> c.getFirstName().equals("duck"));
+
+        List<Customer> filteredCustomers =
+                customer.parallelStream().filter((Customer c) -> c.getFirstName().equals("James")).collect(toList());
+
+        //List<Customer> filteredCustomers = filterCustomers(customer, Customer::isJames);
         System.out.println(filteredCustomers);
+
+
+
     }
 
 
