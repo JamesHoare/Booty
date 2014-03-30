@@ -14,9 +14,12 @@ import java.util.Optional;
 @RestController
 public class BootyController {
 
+    private CustomerCrudRepository customerRepository;
 
     @Autowired
-    private CustomerCrudRepository customerRepository;
+    public BootyController(final CustomerCrudRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @RequestMapping(value = "/booty")
     public @ResponseBody String greetingBooty(){
