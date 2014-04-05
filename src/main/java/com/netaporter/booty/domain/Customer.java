@@ -27,6 +27,8 @@ public class Customer implements Serializable {
 
     }
 
+    public enum Type { EIP, NORMAL}
+
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
