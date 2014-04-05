@@ -1,5 +1,7 @@
 package com.netaporter.booty.domain;
 
+import com.gs.collections.api.list.MutableList;
+import com.gs.collections.impl.list.mutable.FastList;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
@@ -27,6 +29,10 @@ public class Customer implements Serializable {
 
     }
 
+    public MutableList<Address> getShippingAddress() {
+        return shippingAddress;
+    }
+
     public enum Type { EIP, NORMAL}
 
     public Customer(String firstName, String lastName) {
@@ -39,6 +45,8 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer customerId;
+
+    private MutableList<Address> shippingAddress = FastList.newListWith(new Address("grant road","rg45 7jg"));
 
     public Integer getCustomerId() {
         return customerId;
@@ -95,3 +103,5 @@ public class Customer implements Serializable {
         this.lastName = lastName;
     }
 }
+
+
