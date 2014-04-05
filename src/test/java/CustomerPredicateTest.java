@@ -1,3 +1,6 @@
+import com.gs.collections.api.list.ImmutableList;
+import com.gs.collections.api.list.MutableList;
+import com.gs.collections.impl.list.mutable.FastList;
 import com.netaporter.booty.domain.Customer;
 import org.junit.Test;
 
@@ -30,6 +33,15 @@ public class CustomerPredicateTest {
 
         //List<Customer> filteredCustomers = filterCustomers(customer, Customer::isJames);
         System.out.println(filteredCustomers);
+
+
+        /**
+         * gs collection and lambdas
+         */
+        MutableList<Integer> expectedNames = FastList.newListWith(50,100,40);
+        List<Integer> greaterThanFifty =
+                expectedNames.select(each -> each > 50);
+        System.out.println(greaterThanFifty);
 
 
 
