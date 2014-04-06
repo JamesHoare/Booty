@@ -1,5 +1,6 @@
 import com.gs.collections.api.list.MutableList;
 import com.gs.collections.api.partition.list.PartitionMutableList;
+import com.gs.collections.impl.factory.Lists;
 import com.gs.collections.impl.list.mutable.FastList;
 import com.netaporter.booty.domain.Address;
 import com.netaporter.booty.domain.Customer;
@@ -62,6 +63,10 @@ public class CustomerPredicateTest {
 
         MutableList<Address> flatCustomer = customer.flatCollect(c -> c.getShippingAddress());
         assertSize(3, flatCustomer);
+
+        //System.out.println(customer.stream().map(Customer::getCustomerId).reduce(0, (x, y) -> x + y));
+
+
 
 
     }

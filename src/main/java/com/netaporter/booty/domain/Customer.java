@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -44,15 +45,15 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer customerId;
+    private Optional<Integer> customerId;
 
     private MutableList<Address> shippingAddress = FastList.newListWith(new Address("grant road","rg45 7jg"));
 
-    public Integer getCustomerId() {
+    public Optional<Integer> getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Optional<Integer> customerId) {
         this.customerId = customerId;
     }
 
