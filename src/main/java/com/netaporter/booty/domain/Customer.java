@@ -19,7 +19,7 @@ import java.util.function.Predicate;
  * Created by jameshoare on 29/03/2014.
  */
 @Entity
-public class Customer implements Serializable {
+public class Customer implements Serializable, CustomerOperations {
 
     @Override
     public String toString() {
