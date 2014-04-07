@@ -4,10 +4,7 @@ import com.gs.collections.api.list.MutableList;
 import com.gs.collections.impl.list.mutable.FastList;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +27,7 @@ public class Customer implements Serializable, CustomerOperations {
 
     }
 
+    @Transient
     public MutableList<Address> getShippingAddress() {
         return shippingAddress;
     }
@@ -45,15 +43,17 @@ public class Customer implements Serializable, CustomerOperations {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Optional<Integer> customerId;
+    private Integer customerId;
 
+    @Transient
     private MutableList<Address> shippingAddress = FastList.newListWith(new Address("grant road","rg45 7jg"));
 
-    public Optional<Integer> getCustomerId() {
+
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Optional<Integer> customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
